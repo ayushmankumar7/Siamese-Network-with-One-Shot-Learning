@@ -3,6 +3,8 @@ import numpy as np
 from tensorflow.keras.layers import Dense, Conv2D, MaxPooling2D, Input, Flatten, Lambda
 from tensorflow.keras.models import Model, Sequential
 
+
+from utils import initialize_bias, initialize_weights
 # tf.keras.initializers.lecun_normal()
 
 def siamese_network(input_shape):
