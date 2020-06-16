@@ -36,5 +36,7 @@ def siamese_network(input_shape):
 
     final_model = Model(inputs = [input1, input2], outputs = prediction)
 
+    model.compile( loss = 'binary_crossentropy',
+    optimizer = tf.keras.optimizers.Adam(lr = 6*(1e-5)))
 
     return final_model
