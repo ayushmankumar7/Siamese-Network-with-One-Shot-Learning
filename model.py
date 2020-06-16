@@ -3,7 +3,7 @@ import numpy as np
 from tensorflow.keras.layers import Dense, Conv2D, MaxPooling2D, Input, Flatten, Lambda
 from tensorflow.keras.models import Model, Sequential
 
-
+# tf.keras.initializers.lecun_normal()
 
 def siamese_network(input_shape):
 
@@ -13,15 +13,15 @@ def siamese_network(input_shape):
 
     model = Sequential([
 
-        Conv2D(64, (10,10), activation = 'relu', input_shape = input_shape),
+        Conv2D(64, (10,10), activation = 'relu', input_shape = input_shape , kernel_initializer = initialize_weights, kernel_regulatizer = tf.keras.regularizers.l2(2e-4)),
         MaxPooling2D(),
-        Conv2D(128, (7,7), activation = 'relu'),
+        Conv2D(128, (7,7), activation = 'relu', kernel_initializer = initialize_weights, bias_initializer = initialize_bias, kernel_regulatizer = tf.keras.regularizers.l2(2e-4)),
         MaxPooling2D(),
-        Conv2D(128, (4,4), activation = 'relu'),
+        Conv2D(128, (4,4), activation = 'relu', kernel_initializer = initialize_weights, bias_initializer = initialize_bias, kernel_regulatizer = tf.keras.regularizers.l2(2e-4)),
         MaxPooling2D(),
-        Conv2D(256, (4,4), activation = 'relu'),
+        Conv2D(256, (4,4), activation = 'relu', kernel_initializer = initialize_weights, bias_initializer = initialize_bias, kernel_regulatizer = tf.keras.regularizers.l2(2e-4)),
         Flatten(),
-        Dense(4096, activation = 'sigmoid')
+        Dense(4096, activation = 'sigmoid', kernel_initializer = initialize_weights, bias_initializer = initialize_bias, kernel_regulatizer = tf.keras.regularizers.l2(1e-3))
     ])
 
     encoded_1 = model(input1)
